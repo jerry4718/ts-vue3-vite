@@ -6,7 +6,6 @@
 
 <script lang="ts">
 import {defineComponent} from "vue";
-import "./config-local-config-list.css";
 
 interface LocalConfigListProps {
 
@@ -21,5 +20,7 @@ export default defineComponent({
 </script>
 
 <style scoped>
-
+.config-local-config-list {
+    background: #ADDE8C;
+}
 </style>

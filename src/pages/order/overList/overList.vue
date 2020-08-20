@@ -6,7 +6,6 @@
 
 <script lang="ts">
 import {defineComponent} from "vue";
-import "./order-over-list.css";
 
 interface OverListProps {
 
@@ -21,5 +20,7 @@ export default defineComponent({
 </script>
 
 <style scoped>
-
+.order-over-list {
+    background: #B7CDCA;
+}
 </style>

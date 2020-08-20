@@ -6,7 +6,6 @@
 
 <script lang="ts">
 import {defineComponent} from "vue";
-import "./order-normal-list.css";
 
 interface NormalListProps {
 
@@ -21,5 +20,7 @@ export default defineComponent({
 </script>
 
 <style scoped>
-
+.order-normal-list {
+    background: #F669EF;
+}
 </style>

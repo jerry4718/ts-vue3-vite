@@ -6,7 +6,6 @@
 
 <script lang="ts">
 import {defineComponent} from "vue";
-import "./account-account-list.css";
 
 interface AccountListProps {
 
@@ -21,5 +20,7 @@ export default defineComponent({
 </script>
 
 <style scoped>
-
+.account-account-list {
+    background: #FFEAEE;
+}
 </style>

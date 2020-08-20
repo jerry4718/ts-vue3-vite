@@ -1,8 +1,8 @@
 <template>
     <div class="nav-head">
         <div
-                v-for="(menu, mdx) in menus"
-                :key="mdx"
+                v-for="menu in menus"
+                :key="menu.id"
                 class="nav-head-item"
                 :class="{ 'selected': menu.id === selected }"
                 @click="onChangeHandler(menu.id)"

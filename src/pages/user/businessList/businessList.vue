@@ -6,7 +6,6 @@
 
 <script lang="ts">
 import {defineComponent} from "vue";
-import "./user-business-list.css";
 
 interface BusinessListProps {
 
@@ -21,5 +20,7 @@ export default defineComponent({
 </script>
 
 <style scoped>
-
+.user-business-list {
+    background: #8EFCE6;
+}
 </style>

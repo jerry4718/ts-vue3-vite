@@ -6,7 +6,6 @@
 
 <script lang="ts">
 import {defineComponent} from "vue";
-import "./user-black-list.css";
 
 interface BlackListProps {
 
@@ -21,5 +20,7 @@ export default defineComponent({
 </script>
 
 <style scoped>
-
+.user-black-list {
+    background: #7AB6D6;
+}
 </style>

@@ -17,6 +17,17 @@ const params = args.filter(a => a.indexOf('=') > -1)
 
 const pagePath = path.join(srcPath, params.path || 'pages');
 
+const randomColor = (() => {
+    const source = "6789ABCDEF".split("");
+    return () => {
+        let colorTokens = [];
+        for (let i = 0; i < 6; i ++) {
+            colorTokens.push(source[Math.floor(source.length * Math.random())]);
+        }
+        return colorTokens.join("");
+    }
+})()
+
 args.filter(a => a.indexOf('=') < 0)
     .forEach(dir => {
         const fileName = dir.split(/\//g).pop();
@@ -53,7 +64,6 @@ args.filter(a => a.indexOf('=') < 0)
 
 <script lang="ts">
 import {defineComponent} from "vue";
-import "./${cssFileRelative}";
 
 interface ${className}Props {
 
@@ -68,10 +78,10 @@ export default defineComponent({
 </script>
 
 <style scoped>
-
+.${componentName} {
+    background: #${randomColor()};
+}
 </style>`.trim());
-
-        fs.writeFileSync(cssFilePath, `.${componentName} {}`.trim());
 
     });
 console.log();

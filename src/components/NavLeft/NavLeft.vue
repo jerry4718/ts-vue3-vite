@@ -1,5 +1,8 @@
 <template>
-    <NopElement v-for="headerMenu in headerMenus">
+    <NopElement 
+        v-for="headerMenu in headerMenus"
+        :key="headerMenu.id"
+    >
         <NavLeftItem
                 v-if="headerMenu.id === headerSelected"
                 :headerMenuId="headerMenu.id"

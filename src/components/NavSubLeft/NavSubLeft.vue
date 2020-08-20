@@ -1,8 +1,8 @@
 <template>
     <div class="sub-nav-left">
         <router-link
-                v-for="(menu, mdx) in menus"
-                :key="mdx"
+                v-for="menu in menus"
+                :key="menu.id"
                 :to='parseSubLeftMenuRoute(menu)'
         >
             <div

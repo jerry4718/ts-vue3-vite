@@ -6,7 +6,6 @@
 
 <script lang="ts">
 import {defineComponent} from "vue";
-import "./log-log-list.css";
 
 interface LogListProps {
 
@@ -21,5 +20,7 @@ export default defineComponent({
 </script>
 
 <style scoped>
-
+.log-log-list {
+    background: #A8A6FF;
+}
 </style>

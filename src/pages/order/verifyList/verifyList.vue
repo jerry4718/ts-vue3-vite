@@ -6,7 +6,6 @@
 
 <script lang="ts">
 import {defineComponent} from "vue";
-import "./order-verify-list.css";
 
 interface VerifyListProps {
 
@@ -21,5 +20,7 @@ export default defineComponent({
 </script>
 
 <style scoped>
-
+.order-verify-list {
+    background: #7797AA;
+}
 </style>

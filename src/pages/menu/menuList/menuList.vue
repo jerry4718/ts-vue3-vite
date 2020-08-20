@@ -6,7 +6,6 @@
 
 <script lang="ts">
 import {defineComponent} from "vue";
-import "./menu-menu-list.css";
 
 interface MenuListProps {
 
@@ -21,5 +20,7 @@ export default defineComponent({
 </script>
 
 <style scoped>
-
+.menu-menu-list {
+    background: #FA67FD;
+}
 </style>

@@ -6,7 +6,6 @@
 
 <script lang="ts">
 import {defineComponent} from "vue";
-import "./config-third-config-list.css";
 
 interface ThirdConfigListProps {
 
@@ -21,5 +20,7 @@ export default defineComponent({
 </script>
 
 <style scoped>
-
+.config-third-config-list {
+    background: #BFC77D;
+}
 </style>

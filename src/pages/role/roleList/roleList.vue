@@ -6,7 +6,6 @@
 
 <script lang="ts">
 import {defineComponent} from "vue";
-import "./role-role-list.css";
 
 interface RoleListProps {
 
@@ -21,5 +20,7 @@ export default defineComponent({
 </script>
 
 <style scoped>
-
+.role-role-list {
+    background: #778FAD;
+}
 </style>
