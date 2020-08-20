@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import {defineComponent, inject, onMounted, ref} from "vue";
+import {defineComponent, inject} from "vue";
 
 export default defineComponent(() => {
     const count = inject("provide.count");

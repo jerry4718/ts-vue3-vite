@@ -13,7 +13,7 @@
                 <div>
                     <button @click="addMenus([{moduleName: '', id: -2}])">add menus</button>
                     <div>
-                        {{state.menus}}
+                        {{menus}}
                     </div>
                 </div>
                 <div>
@@ -38,7 +38,7 @@ import ContentPack from "../ContentPack/ContentPack.vue";
 import NavHead from '../NavHead/NavHead.vue'
 import NavLeft from '../NavLeft/NavLeft.vue'
 import {MenuProto} from "../../model/MenuProto";
-import {reactive, defineAsyncComponent} from "vue";
+import {reactive, toRefs} from "vue";
 import "./App.css";
 import CountProvider from "../../providers/CountProvider/CountProvider.vue";
 import CountView from "../../providers/CountProvider/CountView.vue";
@@ -64,10 +64,7 @@ export default {
             state.menus = menus.concat(newMenus.filter(newOne => menus.every(oldOne => oldOne.id !== newOne.id)));
         }
 
-        return {
-            state,
-            addMenus,
-        }
+        return { ...toRefs(state), addMenus, }
     }
 }
 </script>
