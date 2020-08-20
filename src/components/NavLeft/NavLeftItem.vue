@@ -19,7 +19,6 @@
 
 <script lang="ts">
 import NavSubLeft from "../NavSubLeft/NavSubLeft.vue";
-import NopElement from "../NoneElement/NoneElement.vue";
 import {MenuProto} from "../../model/MenuProto";
 import {Injection} from "../../common/constant/Injection";
 import {inject, onMounted, reactive, toRefs} from "vue";
@@ -28,7 +27,6 @@ export default {
     name: "NavLeft",
     components: {
         NavSubLeft,
-        NopElement,
     },
     props: {
         headerMenuId: Number,

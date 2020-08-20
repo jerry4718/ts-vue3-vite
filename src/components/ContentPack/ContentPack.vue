@@ -1,6 +1,6 @@
 <template>
     <div class="content-pack">
-        <CacheMenusProvider>
+        <MenuCacheProvider>
             <NavMenuProvider>
                 <div class="header-pack">
                     <slot name="nav-head"></slot>
@@ -16,18 +16,18 @@
                 </div>
                 <!--<div class="footer-pack"></div>-->
             </NavMenuProvider>
-        </CacheMenusProvider>
+        </MenuCacheProvider>
     </div>
 </template>
 
 <script>
 import NavMenuProvider from "../../providers/NavMenu/NavMenuProvider.vue";
-import CacheMenusProvider from "../../providers/CacheMenus/CacheMenusProvider.vue";
+import MenuCacheProvider from "../../providers/MenuCache/MenuCacheProvider.vue";
 
 export default {
     components: {
         NavMenuProvider,
-        CacheMenusProvider,
+        MenuCacheProvider,
     },
     name: "ContentPack"
 }

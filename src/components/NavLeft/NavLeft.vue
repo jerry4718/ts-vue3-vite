@@ -8,7 +8,7 @@
 </template>
 
 <script lang="ts">
-import NopElement from "../NoneElement/NoneElement.vue";
+import NopElement from "../NopElement/NopElement.vue";
 import NavLeftItem from "./NavLeftItem.vue";
 import NavSubLeft from "../NavSubLeft/NavSubLeft.vue";
 import {inject} from "vue";
@@ -22,8 +22,8 @@ export default {
         NavSubLeft,
     },
     setup() {
-        let headerMenus = inject(Injection.NavMenu.HEADER_MENUS);
-        let headerSelected = inject(Injection.NavMenu.HEADER_SELECTED);
+        const headerMenus = inject(Injection.NavMenu.HEADER_MENUS);
+        const headerSelected = inject(Injection.NavMenu.HEADER_SELECTED);
 
         return {
             headerMenus,

@@ -10,10 +10,24 @@
 
         <template #pack-center>
             <div>
-                <button @click="addMenus([{moduleName: '', id: -2}])">add menus</button>
-            </div>
-            <div>
-                {{state.menus}}
+                <div>
+                    <button @click="addMenus([{moduleName: '', id: -2}])">add menus</button>
+                    <div>
+                        {{state.menus}}
+                    </div>
+                </div>
+                <div>
+                    <CountProvider>
+                        <CountView></CountView>
+                    </CountProvider>
+
+                    <CountProvider>
+                        <CountView></CountView>
+                    </CountProvider>
+                </div>
+                <div>
+                    <router-view />
+                </div>
             </div>
         </template>
     </ContentPack>
@@ -26,6 +40,8 @@ import NavLeft from '../NavLeft/NavLeft.vue'
 import {MenuProto} from "../../model/MenuProto";
 import {reactive, defineAsyncComponent} from "vue";
 import "./App.css";
+import CountProvider from "../../providers/CountProvider/CountProvider.vue";
+import CountView from "../../providers/CountProvider/CountView.vue";
 
 export default {
     name: 'App',
@@ -33,6 +49,8 @@ export default {
         ContentPack,
         NavHead,
         NavLeft,
+        CountProvider,
+        CountView,
     },
     setup() {
         const indexMain = {moduleUrl: "/index/indexMain", moduleName: '首页', id: -1} as MenuProto;

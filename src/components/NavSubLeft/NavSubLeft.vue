@@ -1,13 +1,17 @@
 <template>
     <div class="sub-nav-left">
-        <div v-for="(menu, mdx) in menus"
-             :key="mdx"
-             class="sub-nav-left-item"
-             :class="{'selected': menu.id === selected}"
-             :title="parseMenuRoute(menu)"
+        <router-link
+                v-for="(menu, mdx) in menus"
+                :key="mdx"
+                :to='parseSubLeftMenuRoute(menu)'
         >
-            {{menu.moduleName}}
-        </div>
+            <div
+                    class="sub-nav-left-item"
+                    :class="{'selected': menu.id === selected}"
+            >
+                {{menu.moduleName}}
+            </div>
+        </router-link>
     </div>
 </template>
 
@@ -30,6 +34,9 @@ export default {
 
         const getOrFromCache = inject(Injection.NavMenu.GET_OR_FROM_CACHE);
 
+        const headerSelected = inject(Injection.NavMenu.HEADER_SELECTED);
+        const lefterSelected = inject(Injection.NavMenu.LEFTER_SELECTED);
+
         const menus = ref([] as MenuProto[]);
         const selected = ref(-1);
 
@@ -48,7 +55,12 @@ export default {
             }
         })
 
-        return {menus, selected, parseMenuRoute}
+        function parseSubLeftMenuRoute(menu: MenuProto) {
+            const params = [{key: "route-space", value: [headerSelected.value, lefterSelected.value, menu.id].join(".")}];
+            return parseMenuRoute(menu, params);
+        }
+
+        return {menus, selected, parseSubLeftMenuRoute}
     }
 };
 </script>
