@@ -44,9 +44,6 @@ html, body, #app, .content-pack {
   margin-left: 5px;
   border: solid 1px #66ccff;
 }
-.pack-center>:nth-child(1) {
-  flex-grow: 1;
-}
 
 .pack-right {
   flex-shrink: 0;

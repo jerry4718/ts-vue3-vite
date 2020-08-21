@@ -1,21 +1,25 @@
-import {createRouter, createWebHistory, RouteRecordRaw} from 'vue-router'
+import {createRouter, createWebHashHistory, RouteRecordRaw} from 'vue-router'
 import {defineAsyncComponent} from 'vue';
 import {MenuProto} from "../model/MenuProto";
+import {asyncRoutes} from "./async-routes";
 
-export const routes: RouteRecordRaw[] = [{
-    path: "/",
-    // @ts-ignore
-    component: defineAsyncComponent(() => import("../pages/index/indexMain/indexMain.vue"))
-}];
+export const routes: RouteRecordRaw[] = [
+    {
+        path: "/",
+        // @ts-ignore
+        component: defineAsyncComponent(() => import("../pages/index/indexMain/indexMain.vue"))
+    },
+    ...asyncRoutes
+];
 
 export const router = createRouter({
-    history: createWebHistory(),
+    history: createWebHashHistory(),
     routes: routes,
 });
 
 export function registerRoutes(menus: MenuProto[]) {
 
-    menus.forEach(menu => {
+    /*menus.forEach(menu => {
         const {moduleUrl} = menu;
 
         const modulePath = moduleUrl.replace(/^(\/|)/, '/');
@@ -57,5 +61,5 @@ export function registerRoutes(menus: MenuProto[]) {
             path: routePath,
             component: LazyComponent,
         })
-    })
+    })*/
 }
