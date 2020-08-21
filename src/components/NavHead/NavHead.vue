@@ -18,9 +18,9 @@ import {Injection} from "../../common/constant/Injection";
 
 export default {
     setup() {
-        let menus = inject(Injection.NavMenu.HEADER_MENUS);
-        let selected = inject(Injection.NavMenu.HEADER_SELECTED);
-        let updateSelectedHeader = inject(Injection.NavMenu.UPDATE_HEADER_SELECTED);
+        let menus = inject(Injection.NavMenu.headerMenus);
+        let selected = inject(Injection.NavMenu.headerSelected);
+        let updateSelectedHeader = inject(Injection.NavMenu.updateHeaderSelected);
 
         function onChangeHandler(selected: number) {
             updateSelectedHeader(selected);

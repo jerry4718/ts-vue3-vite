@@ -1,13 +1,11 @@
 import {createRouter, createWebHashHistory, RouteRecordRaw} from 'vue-router'
-import {defineAsyncComponent} from 'vue';
 import {MenuProto} from "../model/MenuProto";
 import {asyncRoutes} from "./async-routes";
 
 export const routes: RouteRecordRaw[] = [
     {
         path: "/",
-        // @ts-ignore
-        component: defineAsyncComponent(() => import("../pages/index/indexMain/indexMain.vue"))
+        redirect: "/index/indexMain",
     },
     ...asyncRoutes
 ];

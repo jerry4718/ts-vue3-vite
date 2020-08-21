@@ -25,8 +25,8 @@ export default {
         NavSubLeft,
     },
     setup() {
-        const headerMenus = inject(Injection.NavMenu.HEADER_MENUS);
-        const headerSelected = inject(Injection.NavMenu.HEADER_SELECTED);
+        const headerMenus = inject(Injection.NavMenu.headerMenus);
+        const headerSelected = inject(Injection.NavMenu.headerSelected);
 
         return {
             headerMenus,

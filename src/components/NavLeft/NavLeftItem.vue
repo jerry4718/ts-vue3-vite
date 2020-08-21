@@ -34,10 +34,10 @@ export default {
     setup(props) {
         const {headerMenuId} = props;
 
-        const getOrFromCache = inject(Injection.NavMenu.GET_OR_FROM_CACHE);
+        const getOrFromCache = inject(Injection.NavMenu.getOrFromCache);
 
-        const selected = inject(Injection.NavMenu.LEFTER_SELECTED);
-        const setSelected = inject(Injection.NavMenu.UPDATE_LEFTER_SELECTED);
+        const selected = inject(Injection.NavMenu.lefterSelected);
+        const setSelected = inject(Injection.NavMenu.updateLefterSelected);
 
         const state = reactive({
             menus: [],

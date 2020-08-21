@@ -37,6 +37,6 @@ export default defineComponent(() => {
         return data ?? [];
     };
 
-    provide(Injection.NavMenu.GET_OR_FROM_CACHE, getOrFromCache);
+    provide(Injection.NavMenu.getOrFromCache, getOrFromCache);
 });
 </script>

@@ -9,9 +9,9 @@
         </template>
 
         <template #pack-center>
-            <div class="route-history-bar">
-                <div class="route-history-item-container">
-                    <div class="route-history-item"
+            <div class="route-tab-bar">
+                <div class="route-tab-item-container">
+                    <div class="route-tab-item"
                          v-for="(routeName) in keepAliveNames"
                          :class="{'selected': showingAlive === routeName}"
                          @click.stop="tapRouteNav(aliveRoutes[routeName])"
@@ -66,14 +66,14 @@ export default {
   flex-grow: 1;
 }
 
-.route-history-bar {
+.route-tab-bar {
     width: 100%;
     overflow-x: scroll;
     overflow-y: hidden; }
-.route-history-bar::-webkit-scrollbar {
+.route-tab-bar::-webkit-scrollbar {
     display: none; }
 
-.route-history-item-container {
+.route-tab-item-container {
     flex-flow: row nowrap;
     display: flex;
     height: 25px;
@@ -82,7 +82,7 @@ export default {
     padding: 2px 5px 0;
     border-bottom: #4875a4 solid 1px; }
 
-.route-history-item {
+.route-tab-item {
     height: 24px;
     font-size: 14px;
     text-align: center;
@@ -91,13 +91,13 @@ export default {
     border-width: 1px 1px 0;
     margin-left: 5px;
     flex-shrink: 0; }
-.route-history-item:nth-child(1) {
+.route-tab-item:nth-child(1) {
     margin-left: 0; }
-.route-history-item.selected {
+.route-tab-item.selected {
     z-index: 1;
     background-color: #ffffff;
     border-bottom: #ffffff 2px solid; }
-.route-history-item span {
+.route-tab-item span {
     display: inline-block;
     min-width: 80px;
     padding: 0 15px; }

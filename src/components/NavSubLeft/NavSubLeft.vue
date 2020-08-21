@@ -33,10 +33,10 @@ export default {
     setup(props: NavSubLeftProps) {
         const {parentId} = props;
 
-        const getOrFromCache = inject(Injection.NavMenu.GET_OR_FROM_CACHE);
+        const getOrFromCache = inject(Injection.NavMenu.getOrFromCache);
 
-        const headerSelected = inject(Injection.NavMenu.HEADER_SELECTED);
-        const lefterSelected = inject(Injection.NavMenu.LEFTER_SELECTED);
+        const headerSelected = inject(Injection.NavMenu.headerSelected);
+        const lefterSelected = inject(Injection.NavMenu.lefterSelected);
 
         const menus = ref([] as MenuProto[]);
         const selected = ref(-1);

@@ -24,6 +24,7 @@ ergodic.dirSync(pagesPath, function(file_name, full_path, dir) {
     const routePath = path.relative(routerPath, dir).replace(pathPrefix, "");
     const componentPath = path.relative(routerPath, full_path);
 
+    const routeName = routePath;
 
     routesArr.push(`    {
         path: "${getRoutePath(routePath)}",

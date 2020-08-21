@@ -8,7 +8,7 @@ import {MenuProto} from "../../model/MenuProto";
 import {Injection} from "../../common/constant/Injection";
 
 export default defineComponent(() => {
-    const getOrFromCache = inject(Injection.NavMenu.GET_OR_FROM_CACHE);
+    const getOrFromCache = inject(Injection.NavMenu.getOrFromCache);
     // 提供head的状态
     const headerState = reactive({
         headerMenus: [] as MenuProto[],
@@ -23,9 +23,9 @@ export default defineComponent(() => {
         headerState.headerSelected = selected;
     }
 
-    provide(Injection.NavMenu.HEADER_MENUS, toRef(headerState, "headerMenus"));
-    provide(Injection.NavMenu.HEADER_SELECTED, toRef(headerState, "headerSelected"));
-    provide(Injection.NavMenu.UPDATE_HEADER_SELECTED, setHeaderSelected);
+    provide(Injection.NavMenu.headerMenus, toRef(headerState, "headerMenus"));
+    provide(Injection.NavMenu.headerSelected, toRef(headerState, "headerSelected"));
+    provide(Injection.NavMenu.updateHeaderSelected, setHeaderSelected);
 
     // 提供left的状态
     const lefterState = reactive({
@@ -36,8 +36,8 @@ export default defineComponent(() => {
         lefterState.lefterSelected = selected;
     }
 
-    provide(Injection.NavMenu.LEFTER_SELECTED, toRef(lefterState, "lefterSelected"));
-    provide(Injection.NavMenu.UPDATE_LEFTER_SELECTED, setLefterSelected);
+    provide(Injection.NavMenu.lefterSelected, toRef(lefterState, "lefterSelected"));
+    provide(Injection.NavMenu.updateLefterSelected, setLefterSelected);
 
     // 初始加载header中的菜单
     onMounted(async () => {
