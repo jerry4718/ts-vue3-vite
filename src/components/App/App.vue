@@ -11,7 +11,7 @@
         <template #pack-center>
             <div class="route-tab-bar">
                 <div class="route-tab-item-container">
-                    <div class="route-tab-item"
+                    <!-- <div class="route-tab-item"
                          v-for="(routeName) in keepAliveNames"
                          :class="{'selected': showingAlive === routeName}"
                          @click.stop="tapRouteNav(aliveRoutes[routeName])"
@@ -24,11 +24,15 @@
                             {{aliveRoutes[routeName].moduleName}}
                         </span>
                         <FaIcon class="fa-pull-right" name="icon-remove" @click="removeKeepAlive(routeName)"></FaIcon>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="route-content">
-                <router-view />
+                <router-view v-slot="{ Component }">
+                    <keep-alive>
+                        <component :is="Component" />
+                    </keep-alive>
+                </router-view>
             </div>
         </template>
     </ContentPack>
@@ -39,6 +43,7 @@ import ContentPack from "../ContentPack/ContentPack.vue";
 import NavHead from '../NavHead/NavHead.vue'
 import NavLeft from '../NavLeft/NavLeft.vue'
 import {MenuProto} from "../../model/MenuProto";
+import NavTabProvider from "../../providers/NavTab/NavTabProvider.vue";
 import "./App.css";
 
 export default {
@@ -47,6 +52,7 @@ export default {
         ContentPack,
         NavHead,
         NavLeft,
+        NavTabProvider,
     },
     setup() {
         return {};

@@ -20,7 +20,6 @@ import {MenuProto} from "../../model/MenuProto";
 import {parseMenuRoute} from "../../common/utils/UrlUtils";
 import {inject, onMounted, ref} from "vue";
 import {Injection} from "../../common/constant/Injection";
-import {registerRoutes} from "../../routes/router";
 
 interface NavSubLeftProps {
     parentId: number,
@@ -53,7 +52,6 @@ export default {
             if (parentId !== -1) {
                 const menus = await getOrFromCache(parentId);
                 setMenus(menus);
-                registerRoutes(menus);
             }
         })
 

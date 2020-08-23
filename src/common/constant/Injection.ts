@@ -14,4 +14,10 @@ export namespace Injection {
         export const lefterSelected: InjectionRefKey<number> = Symbol();
         export const updateLefterSelected: InjectionKey<(selected: number) => void> = Symbol();
     }
+
+    export namespace NavTab {
+        export const keepAliveIncludes: InjectionRefKey<string[]> = Symbol();
+        export const addKeepAlive: InjectionKey<(componentName: string) => void> = Symbol();
+        export const removeKeepAlive: InjectionKey<(componentName: string) => void> = Symbol();
+    }
 }

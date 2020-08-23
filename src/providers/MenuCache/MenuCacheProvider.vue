@@ -8,6 +8,8 @@ import {MenuProto} from "../../model/MenuProto";
 import {menuList} from "../../common/api/api";
 import {VarUtil} from "../../common/utils/VarUtil";
 import {Injection} from "../../common/constant/Injection";
+import { parseRouteName, parseComponentName } from "../../routes/dynamic-routes";
+import { registerRoute } from "../../routes/router";
 
 export default defineComponent(() => {
     // 缓存权限菜单
@@ -17,6 +19,14 @@ export default defineComponent(() => {
         const {value: cache} = cacheMenus;
 
         const newAdd = add.filter(addOne => cache.every(cacheOne => cacheOne.id !== addOne.id));
+
+        newAdd.forEach(addOne => {
+            const {moduleUrl} = addOne;
+
+            if (moduleUrl) {
+                registerRoute(addOne);
+            }
+        })
 
         cacheMenus.value = cache.concat(newAdd);
     };

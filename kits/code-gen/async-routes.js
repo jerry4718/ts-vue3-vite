@@ -18,6 +18,9 @@ const concurrentMapper = {
 
 const routesArr = [];
 
+const routesMapperKV = [];
+
+
 ergodic.dirSync(pagesPath, function(file_name, full_path, dir) {
 
     const routePath = path.relative(routerPath, dir).replace(pathPrefix, "");
@@ -25,36 +28,32 @@ ergodic.dirSync(pagesPath, function(file_name, full_path, dir) {
 
     console.log(routePath);
 
-    if (concurrentMapper[routePath]) {
-        concurrentMapper[routePath].forEach(s => {
-            routesArr.push(`    // @ts-ignore\n    "${s}": defineAsyncComponent(() => import("${componentPath}")),`);
-        })
-    } else {
-        routesArr.push(`    // @ts-ignore\n    "${routePath}": defineAsyncComponent(() => import("${componentPath}")),`);
-    }
+    routesMapperKV.push(`    // @ts-ignore\n   ['${routePath}', () => import("${componentPath}")],`);
+
+    // if (concurrentMapper[routePath]) {
+    //     concurrentMapper[routePath].forEach(s => {
+    //         routesArr.push(`    // @ts-ignore\n    "${s}": defineAsyncComponent(() => import("${componentPath}")),`);
+    //     })
+    // } else {
+    //     routesArr.push(`    // @ts-ignore\n    "${routePath}": defineAsyncComponent(() => import("${componentPath}")),`);
+    // }
 })
 
 
 /*import {AsyncComponentLoader, AsyncComponentOptions, Component, ComponentPublicInstance} from "@vue/runtime-core";
 
+type AnonymousAsyncComponent = new () => ComponentPublicInstance;
+
 function convertAnonymousAsyncComponent<T extends Component = {new (): ComponentPublicInstance;}>(source: AsyncComponentLoader<T> | AsyncComponentOptions<T>): T {
     return defineAsyncComponent(source);
 }*/
 
-const code = `import {defineAsyncComponent} from 'vue';
+const code = `export const dynamicRouteLoaders = new Map<string, () => Promise<any>>([
+    ${routesMapperKV.join('\n')}
+]);
+`
 
-const concurrentMapper = {
-
-};
-
-const routesMapper = {
-${routesArr.join("\n")}
-};
-
-export const asyncRoutes = [
-];`
-
-fs.writeFileSync(path.join(routerPath, "async-routes.ts"), code);
+fs.writeFileSync(path.join(routerPath, "dynamic-route-loaders.ts"), code);
 console.log(code);
 /*
 */
