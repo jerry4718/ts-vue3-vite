@@ -3,26 +3,43 @@ import { defineComponent, h, defineAsyncComponent } from "vue";
 import { MD5Util } from "../../utils/MD5Util";
 import { dynamicRouteLoaders } from "../../../routes/dynamic-route-loaders";
 
+interface Parsers {
+  routeName: (routePath: string, tags: string[]) => string;
+  componentName: (routePath: string, tags: string[]) => string;
+  routeRaw: (routePath: string, tags: string[]) => RouteRecordRaw;
+  tags: (tags: string[]) => string;
+}
+
 interface DynamicRouterOptions {
-  defualtOptions: RouterOptions;
-  componentLoders: Map<string, () => Promise<any>>;
+  installOptions: RouterOptions;
+  componentLoaders: Map<string, () => Promise<any>>;
+  parsers: Parsers;
 }
 
+// 保存已经被覆盖掉的原vue-router的属性
+interface RouterPlace {
+
+}
+
+// 扩展的一些属性
 interface DynamicRouterExpand {
-  place: Router
+  _: RouterPlace
 }
 
+// 扩展属性和原本Router的interface合并为DynamicRouter
 declare type DynamicRouter = Router & DynamicRouterExpand;
 
 const assign = Object.assign;
 
 function createDynamicRouter(options: DynamicRouterOptions): DynamicRouter {
-  const {defualtOptions, componentLoders} = options;
+  const {installOptions, componentLoaders} = options;
 
-  const router = createRouter(defualtOptions);
+  const router = createRouter(installOptions);
+
+  const routerPlace: RouterPlace = {};
 
   const expand: DynamicRouterExpand = {
-    place: router,
+    _: routerPlace,
   };
 
   return assign(router, expand);
@@ -34,15 +51,15 @@ export namespace RouterUtil {
     [/(\/|)config\/thirdConfigList\/[^/]*?/, "/config/thirdConfigList"],
   ]);
 
-  const pathSplitor = "_";
-  const tagsSplitor = "_";
-  const pathTagsSplitor = "$";
+  const pathSeparator = "_";
+  const tagsSeparator = "_";
+  const pathTagsSeparator = "$";
 
   const firstSlashReg = /^\//;
-  const rpathSplitReg = /[./]|(?=[A-Z])/g;
+  const pathSplitReg = /[./]|(?=[A-Z])/g;
 
-  const splitorsReg1 = /([^a-zA-Z0-9]|^)./g;
-  const splitorsReg2 = /[^a-zA-Z0-9]/;
+  const SeparatorsReg1 = /([^a-zA-Z0-9]|^)./g;
+  const SeparatorsReg2 = /[^a-zA-Z0-9]/;
 
   const camelReg1 = /[^a-zA-Z][a-z]/g;
   const camelReg2 = /[a-z]$/;
@@ -51,13 +68,13 @@ export namespace RouterUtil {
     if (!Array.isArray(tags)) {
       tags = [tags];
     }
-    return tags.join(tagsSplitor);
+    return tags.join(tagsSeparator);
   }
 
   function parseRouteTokens(source: string): string[] {
     return source
       .replace(firstSlashReg, "")
-      .split(rpathSplitReg);
+      .split(pathSplitReg);
   }
 
   function splitRoutePath(routePath: string) {
@@ -75,8 +92,8 @@ export namespace RouterUtil {
 
     const pathTokens = parseRouteTokens(realRoutePath);
 
-    const tagsTokens = tags.length ? [MD5Util.hex_md5(tags.join(tagsSplitor), 10)] : [];
-    // tags.map(tag => parseRouteTokens(tag).join(tagsSplitor));
+    const tagsTokens = tags.length ? [MD5Util.hex_md5(tags.join(tagsSeparator), 10)] : [];
+    // tags.map(tag => parseRouteTokens(tag).join(tagsSeparator));
 
     return { realRoutePath, pathTokens, tagsTokens }
   }
@@ -85,10 +102,10 @@ export namespace RouterUtil {
     const { pathTokens, tagsTokens } = config;
 
     return [
-      pathTokens.join(pathSplitor).toLowerCase(),
+      pathTokens.join(pathSeparator).toLowerCase(),
       ...(
         tagsTokens.length
-          ? [pathTagsSplitor, ...tagsTokens]
+          ? [pathTagsSeparator, ...tagsTokens]
           : []
       ),
     ]
@@ -100,12 +117,12 @@ export namespace RouterUtil {
 
     return [
       ...pathTokens.map(token => token
-        .replace(splitorsReg1, t => t.replace(splitorsReg2, "").toUpperCase())
+        .replace(SeparatorsReg1, t => t.replace(SeparatorsReg2, "").toUpperCase())
         .replace(camelReg1, t => t.replace(camelReg2, it => it.toUpperCase()))
       ),
       ...(
         tagsTokens.length
-          ? [tagsSplitor, ...tagsTokens]
+          ? [tagsSeparator, ...tagsTokens]
           : []
       ),
     ]
